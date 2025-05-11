@@ -1,0 +1,71 @@
+/* ---------- top navigation bar ---------- */
+.navbar {
+  height: 48px;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  padding: 0 32px;
+  font-family: system-ui, Arial, sans-serif;
+  font-size: 15px;
+}
+
+/* brand / logo slot (optional text)  */
+.navbar .brand {
+  font-weight: 700;
+  font-size: 18px;
+  margin-right: 40px;
+}
+
+/* container for the route links */
+.navbar .links {
+  display: flex;
+  gap: 28px;
+}
+
+/* all links */
+.navbar a {
+  color: #555;
+  text-decoration: none;
+  position: relative;
+  padding: 4px 0;
+}
+
+/* underline animation on hover */
+.navbar a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 2px;
+  background: #0077cc;
+  transition: width 0.25s;
+}
+.navbar a:hover { color:#0077cc;}
+.navbar a:hover::after { width:100%; }
+
+/* active route (optional) */
+.navbar a.active {
+  color: #0077cc;
+}
+.navbar a.active::after {
+  width: 100%;
+}
+
+/* pushes logout right */
+.navbar .spacer {
+  flex: 1;
+}
+
+/* logout button */
+.navbar button {
+  padding: 6px 16px;
+  border: none;
+  background: #0077cc;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.navbar button:hover {
+  background: #005fa3;
+}

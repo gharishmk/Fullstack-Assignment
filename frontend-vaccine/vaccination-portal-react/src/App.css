@@ -1,0 +1,36 @@
+/* --- simple UI tweaks for top nav --- */
+nav.navbar {
+  background: #f2f2f2;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 20px;               /* space between links */
+  font-family: Arial, sans-serif;
+}
+
+nav.navbar a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 600;
+}
+
+nav.navbar a:hover {
+  color: #0077cc;
+  text-decoration: underline;
+}
+
+/* pushes Logout to the far right */
+nav.navbar .spacer {
+  flex: 1;
+}
+
+nav.navbar button {
+  padding: 6px 14px;
+  border: 1px solid #555;
+  background: white;
+  cursor: pointer;
+}
+
+nav.navbar button:hover {
+  background: #e5e5e5;
+}

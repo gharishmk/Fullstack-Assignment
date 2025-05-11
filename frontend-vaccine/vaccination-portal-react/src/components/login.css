@@ -1,0 +1,48 @@
+/* full-viewport flex centering */
+.login-wrap {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f9fafc;
+  font-family: system-ui, sans-serif;
+}
+
+/* simple card */
+.login-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px 40px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  min-width: 260px;
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+.login-card h2 {
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.login-card input {
+  padding: 8px 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.login-card button {
+  padding: 8px 10px;
+  border: none;
+  border-radius: 4px;
+  background: #0069d9;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.login-card button:hover {
+  background: #0054b8;
+}
