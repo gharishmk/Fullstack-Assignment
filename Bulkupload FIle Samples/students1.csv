@@ -1,0 +1,3 @@
+studentId,firstName,lastName,dateOfBirth,grade,class,gender,parentName,contactNumber,address
+STU007,Sabarish,Raja,2010-03-20,10,A,female,Manikandan,2345678901,10th cross rd
+STU008,Vinay,Gupta,2010-06-10,10,B,male,Shiv Gupta,3456789012,6th Main Rd
