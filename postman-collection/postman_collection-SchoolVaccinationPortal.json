@@ -1,0 +1,408 @@
+{
+	"info": {
+		"_postman_id": "8504ae64-7202-4d74-b2c0-aeb18f5f5fa6",
+		"name": "School Vaccination Portal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44649225",
+		"_collection_link": "https://harish-197795.postman.co/workspace/Harish's-Workspace~1054d465-2978-4874-831d-b052dfc228c1/collection/44649225-8504ae64-7202-4d74-b2c0-aeb18f5f5fa6?action=share&source=collection_link&creator=44649225"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"if (jsonData.token) {",
+									"    pm.environment.set('authToken', jsonData.token);",
+									"    console.log('Auth token stored successfully');",
+									"} else {",
+									"    console.error('No token received');",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"harish@gmail.com\",\n    \"password\": \"harish@321\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Students",
+			"item": [
+				{
+					"name": "Create Student",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \n  \"studentId\": \"STU001\",\n  \"firstName\": \"Sahana\",\n  \"lastName\": \"Kanna\",\n   \"dateOfBirth\": \"2010-01-01\",\n  \"grade\": \"5\",\n  \"class\": \"A\",\n  \"gender\": \"female\",\n  \"parentName\": \"harish\",\n  \"contactNumber\": \"1234567890\",\n  \"address\": \"123 Main St\",\n  \"vaccinationStatus\": []\n  \n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update Student",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"studentId\": \"STU001\",\n    \"firstName\": \"John\",\n    \"lastName\": \"Doe\",\n    \"dateOfBirth\": \"2010-01-01\",\n    \"grade\": \"5\",\n    \"class\": \"A\",\n    \"gender\": \"male\",\n    \"parentName\": \"Jane Doe\",\n    \"contactNumber\": \"1234567890\",\n    \"address\": \"123 Main St\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Students",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/students",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Students",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/students?search=john&grade=5&class=A&vaccinationStatus=vaccinated",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students"
+							],
+							"query": [
+								{
+									"key": "search",
+									"value": "john"
+								},
+								{
+									"key": "grade",
+									"value": "5"
+								},
+								{
+									"key": "class",
+									"value": "A"
+								},
+								{
+									"key": "vaccinationStatus",
+									"value": "vaccinated"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Bulk Import Students",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/path/to/your/students.csv"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/students/bulk-import",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"bulk-import"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vaccination Drives",
+			"item": [
+				{
+					"name": "Create Drive",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"vaccineName\": \"COVID-19\",\n    \"date\": \"2024-04-15\",\n    \"availableDoses\": 100,\n    \"applicableGrades\": [\"5\", \"6\", \"7\"],\n    \"applicableClasses\": [\"A\", \"B\", \"C\"],\n    \"notes\": \"First dose vaccination drive\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/drives",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"drives"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "vaccinate",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"studentId\": \"6630b1d9d3525f407e13b111\",\n        \"driveId\":   \"6628af8fd3525f407e13a222\",\n        \"doseNumber\": 1\n      }"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/students/vaccinate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"vaccinate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "bulk-vaccinate",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n        \"driveId\":   \"6630b1d9d3525f407e13b111\",\n        \"studentIds\":[\n          \"6628af8fd3525f407e13a222\",\n          \"6628af8fd3525f407e13a222\",\n          \"<6628af8fd3525f407e13a222\"\n        ]\n      }"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/students/bulk-vaccinate",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"students",
+								"bulk-vaccinate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dashboard",
+			"item": [
+				{
+					"name": "Get Dashboard Stats",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/dashboard/stats",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"dashboard",
+								"stats"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Vaccination Report",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{authToken}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/api/dashboard/report?page=1&limit=10&vaccineName=COVID-19",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"dashboard",
+								"report"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "vaccineName",
+									"value": "COVID-19"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "",
+			"type": "default"
+		}
+	]
+}
